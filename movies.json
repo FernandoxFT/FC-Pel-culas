@@ -107,7 +107,7 @@
     "año": 2000,
     "calidad": "1080p HD",
     "genero": "Acción",
-    "precio": 4000,
+    "precio": 0,
     "director": "Ridley Scott",
     "rating": 8.5,
     "descripcion": "Un general romano traicionado es reducido a esclavitud y obligado a convertirse en gladiador. Desde la arena, planea su venganza contra el corrupto emperador que asesinó a su familia y le arrebató todo.",
@@ -115,7 +115,7 @@
     "trailerUrl": "https://www.youtube.com/embed/LdJOWTBZl6Y",
     "videoUrl": "https://pub-2bbc9f37c9cd4b90b6676c74262fcf67.r2.dev/El-gladiador.mp4",
     "categoria": "catalogo",
-    "gratis": false,
+    "gratis": true,
     "precioOriginal": null
   }
 ]
