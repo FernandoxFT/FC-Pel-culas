@@ -1,0 +1,33 @@
+/* ===== NOTIFICACIONES ===== */
+.notification {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    padding: 16px 24px;
+    border-radius: 8px;
+    z-index: 3500;
+    animation: slideInRight 0.3s ease-out;
+    max-width: 300px;
+    font-weight: 600;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.notification.success {
+    background: var(--success-color);
+    color: white;
+}
+
+.notification.error {
+    background: var(--error-color);
+    color: white;
+}
+
+.notification.warning {
+    background: var(--warning-color);
+    color: white;
+}
+
+.notification.info {
+    background: var(--accent-color);
+    color: white;
+}

@@ -1,0 +1,283 @@
+.btn-google {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: white;
+    color: #1f1f1f;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 18px;
+    transition: var(--transition-fast);
+}
+
+.btn-google:hover {
+    background: #f1f1f1;
+}
+
+.login-modal-content {
+    max-width: 400px;
+}
+
+.login-modal-body {
+    padding-top: 8px;
+}
+
+.login-shield-mark {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 10px;
+}
+
+.login-shield-mark svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.social-login-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.btn-social {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.btn-social.btn-google {
+    margin-top: 0;
+}
+
+.btn-facebook {
+    background: #1877F2;
+    color: white;
+}
+
+.btn-facebook:hover {
+    background: #1567d3;
+}
+
+.btn-apple {
+    background: #000000;
+    color: white;
+    border: 1px solid #333;
+}
+
+.btn-apple:hover {
+    background: #1a1a1a;
+}
+
+.password-field-wrap {
+    position: relative;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    cursor: pointer;
+    padding: 4px 6px;
+    line-height: 1;
+}
+
+.password-toggle-btn:hover {
+    color: var(--text-main);
+}
+
+.login-options-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.remember-me-check {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.remember-me-check input {
+    accent-color: var(--gold);
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.forgot-password-link {
+    font-size: 0.85rem;
+    color: var(--gold-light);
+    text-decoration: none;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+}
+
+.forgot-password-intro {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 14px 0 16px;
+    line-height: 1.5;
+}
+
+.login-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin: 20px 0;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.profile-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-color), var(--gold-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 2px var(--gold);
+}
+
+.profile-header-info {
+    min-width: 0;
+}
+
+.profile-name {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-email {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-since {
+    font-size: 0.78rem;
+    color: var(--gold-light);
+    margin-top: 2px;
+}
+
+.profile-section {
+    border-top: 1px solid var(--border-color);
+    padding-top: 16px;
+    margin-top: 16px;
+}
+
+.profile-section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.profile-compras-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.profile-compra-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 8px 10px;
+}
+
+.profile-compra-item img {
+    width: 32px;
+    height: 46px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.profile-compra-item span {
+    font-size: 0.88rem;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-empty-text {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.btn-profile-action {
+    width: 100%;
+    text-align: left;
+    background: var(--bg-secondary);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: var(--transition-fast);
+}
+
+.btn-profile-action:hover {
+    background: var(--card-hover-bg);
+}
+
+.btn-profile-action.profile-logout {
+    color: var(--accent-color);
+    border-color: rgba(229,9,20,.35);
+    margin-bottom: 0;
+}

@@ -1,0 +1,197 @@
+/* SPLASH SCREEN — FC rojo/negro */
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 50% 42%, #4a060d 0%, #150808 55%, #060303 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    overflow: hidden;
+    transition: opacity 0.9s ease, visibility 0.9s;
+}
+
+.splash-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Anillos de energía pulsante */
+.splash-ring {
+    position: absolute;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-color);
+    opacity: 0;
+    animation: splashRingExpand 2.4s ease-out infinite;
+}
+.splash-ring:nth-child(2) { animation-delay: .8s; }
+.splash-ring:nth-child(3) { animation-delay: 1.6s; }
+
+@keyframes splashRingExpand {
+    0%   { transform: scale(.55); opacity: .9; border-color: #ff4d5e; }
+    70%  { opacity: .25; }
+    100% { transform: scale(1.35); opacity: 0; }
+}
+
+/* Destello */
+.splash-flash {
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.85) 0%, rgba(229,9,20,.35) 35%, transparent 70%);
+    opacity: 0;
+    animation: splashFlash .5s ease forwards 1.9s;
+}
+@keyframes splashFlash {
+    0%   { opacity: 0; transform: scale(.6); }
+    40%  { opacity: .9; transform: scale(1.1); }
+    100% { opacity: 0; transform: scale(1.4); }
+}
+
+.splash-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.splash-shield-wrap {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.splash-shield {
+    position: absolute;
+    inset: 0;
+    width: 220px;
+    height: 220px;
+    overflow: visible;
+}
+
+.splash-shield-outline {
+    fill: none;
+    stroke: var(--accent-color);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 620;
+    stroke-dashoffset: 620;
+    filter: drop-shadow(0 0 6px rgba(229,9,20,.65));
+    animation: splashDraw 1.8s cubic-bezier(.65,0,.35,1) forwards .2s;
+}
+
+.splash-shield-fill {
+    fill: rgba(229,9,20,0.07);
+    opacity: 0;
+    animation: splashFillIn .8s ease forwards 1.7s;
+}
+
+.splash-shield-gold {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-dasharray: 560;
+    stroke-dashoffset: 560;
+    opacity: 0;
+    filter: drop-shadow(0 0 5px rgba(212,175,55,.6));
+    animation: splashDraw 1.4s cubic-bezier(.65,0,.35,1) forwards .6s,
+               splashGoldIn .3s ease forwards .6s;
+}
+
+@keyframes splashGoldIn {
+    to { opacity: 1; }
+}
+
+@keyframes splashDraw {
+    to { stroke-dashoffset: 0; }
+}
+@keyframes splashFillIn {
+    to { opacity: 1; }
+}
+
+.splash-logo {
+    position: relative;
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 2px;
+    opacity: 0;
+    transform: translateY(10px) scale(.9);
+    text-shadow: 0 0 18px rgba(229,9,20,.55);
+    animation: splashLogoIn .9s cubic-bezier(.34,1.56,.64,1) forwards 1.55s;
+}
+
+.splash-logo span {
+    display: block;
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    color: var(--gold);
+    margin-top: 4px;
+}
+
+@keyframes splashLogoIn {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.splash-loader {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255,255,255,0.1);
+    border-top: 3px solid var(--accent-color);
+    border-radius: 50%;
+    margin: 22px auto 14px;
+    animation: spinLoader 1s linear infinite;
+}
+
+.splash-subtitle {
+    color: #ff4d5e;
+    letter-spacing: 4px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: splashSubFade 1s ease forwards 2.1s;
+}
+
+@keyframes splashSubFade {
+    to { opacity: .75; }
+}
+
+@keyframes spinLoader {
+    to { transform: rotate(360deg); }
+}
+
+/* Botón de sonido del splash */
+#splash-sound-btn {
+    position: absolute;
+    bottom: 26px;
+    right: 26px;
+    z-index: 3;
+    background: #150808;
+    border: 1px solid var(--accent-color);
+    color: #fff;
+    padding: 9px 15px;
+    border-radius: 30px;
+    font-size: 12px;
+    letter-spacing: .5px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+#splash-sound-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+}
+#splash-sound-btn.on {
+    border-color: #ff4d5e;
+}
+
