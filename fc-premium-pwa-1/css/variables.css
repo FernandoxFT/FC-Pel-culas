@@ -1,0 +1,37 @@
+:root {
+    /* ===== PALETA "ÍNDIGO NOCTURNO" — FC Premium ===== */
+    --bg-main: #0F172A;
+    --bg-secondary: #16213A;
+    --card-bg: #1E293B;
+    --card-hover-bg: #283548;
+
+    --accent-color: #6366F1;   /* Índigo */
+    --accent-hover: #4F46E5;
+    --accent-color-rgb: 99, 102, 241;
+
+    --gold: #8B5CF6;           /* Violeta (reemplaza el dorado anterior) */
+    --gold-light: #A78BFA;
+    --gold-dark: #7C3AED;
+    --gold-rgb: 139, 92, 246;
+
+    --success-color: #22C55E;
+    --warning-color: #F59E0B;
+    --error-color: #EF4444;
+
+    --text-main: #F8FAFC;
+    --text-muted: #CBD5E1;
+
+    --border-color: #334155;
+    --border-color-soft: rgba(99, 102, 241, 0.18);
+
+    --bg-main-rgb: 15, 23, 42;
+    --card-bg-rgb: 30, 41, 59;
+    --bg-secondary-rgb: 22, 33, 58;
+
+    --radius-card: 18px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --transition-fast: all 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
+}

@@ -1,0 +1,280 @@
+.transfer-total {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--accent-color);
+    margin: 6px 0 20px;
+}
+
+.transfer-account {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.transfer-account-title {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: white;
+}
+
+.transfer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.transfer-row:last-child {
+    border-bottom: none;
+}
+
+.transfer-value {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-weight: 600;
+    text-align: right;
+}
+
+.btn-copy {
+    background: var(--accent-color);
+    border: none;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 9px;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: var(--transition-fast);
+}
+
+.btn-copy:hover {
+    background: var(--accent-hover);
+}
+
+.btn-copy.copiado {
+    background: #2ecc71;
+}
+
+.transfer-note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 14px 0 18px;
+}
+
+.btn-plan {
+    background: linear-gradient(135deg, #ffb703, #fb8500);
+    color: #1a1a1a;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.btn-plan:hover {
+    transform: translateY(-2px);
+}
+
+.plan-estado {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+}
+
+.plan-estado.activo {
+    color: #2ecc71;
+    font-weight: 700;
+}
+
+.plan-card {
+    position: relative;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.plan-card.plan-destacado {
+    border-color: var(--accent-color);
+    background: linear-gradient(180deg, rgba(var(--accent-color-rgb), 0.08), var(--bg-secondary));
+}
+
+.plan-badge {
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-color);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.plan-card h3 {
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.plan-precio {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--accent-color);
+    margin-bottom: 6px;
+}
+
+.plan-desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.badge-estreno {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: linear-gradient(135deg, #ffb703, #fb8500);
+    color: #1a1a1a;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 6px;
+    z-index: 2;
+}
+
+.badge-oferta {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 6px;
+    z-index: 2;
+}
+
+.precio-original {
+    text-decoration: line-through;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-right: 6px;
+}
+
+.precio-oferta {
+    color: #2ecc71;
+}
+
+#avisos-container {
+    position: sticky;
+    top: 0;
+    z-index: 90;
+}
+
+.aviso-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: white;
+}
+
+.aviso-banner.aviso-vencimiento {
+    background: linear-gradient(90deg, #fb8500, #ffb703);
+    color: #1a1a1a;
+}
+
+.aviso-banner.aviso-oferta {
+    background: linear-gradient(90deg, #27ae60, #2ecc71);
+}
+
+.aviso-banner button.aviso-accion {
+    background: rgba(0,0,0,0.2);
+    border: none;
+    color: inherit;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.aviso-banner .aviso-cerrar {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.1rem;
+    cursor: pointer;
+    opacity: 0.7;
+    line-height: 1;
+}
+
+.aviso-banner .aviso-cerrar:hover {
+    opacity: 1;
+}
+
+.comprobante-upload {
+    margin-bottom: 16px;
+}
+
+.comprobante-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px;
+    background: var(--bg-secondary);
+    border: 2px dashed var(--border-color);
+    border-radius: 10px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.comprobante-label:hover {
+    border-color: var(--accent-color);
+    color: white;
+}
+
+.comprobante-label.cargado {
+    border-color: #2ecc71;
+    border-style: solid;
+    color: #2ecc71;
+}
+
+#comprobante-preview {
+    width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-top: 10px;
+    background: black;
+}
+

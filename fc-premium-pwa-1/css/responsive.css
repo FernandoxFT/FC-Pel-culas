@@ -1,0 +1,76 @@
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 12px 3%;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .nav-right {
+        gap: 10px;
+    }
+
+    .btn-login {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+    }
+
+    .container {
+        padding: 30px 3%;
+    }
+
+    .movies-grid {
+        gap: 12px;
+    }
+
+    .cart-sidebar {
+        max-width: 100%;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .movies-grid {
+        gap: 10px;
+    }
+
+    .container {
+        padding: 20px 2%;
+    }
+
+    .genre-title {
+        font-size: 1.3rem;
+    }
+
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+    }
+
+    .search-filter-container {
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .filter-genres {
+        gap: 8px;
+    }
+
+    .btn-filter {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .splash-ring, .splash-shield-outline, .splash-shield-fill, .splash-shield-gold,
+    .splash-logo, .splash-flash, .splash-subtitle {
+        animation: none !important;
+        opacity: 1 !important;
+        stroke-dashoffset: 0 !important;
+    }
+}
