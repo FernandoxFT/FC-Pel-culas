@@ -1,0 +1,342 @@
+/* ===== RESPONSIVE v2 — FC MOVIES+ ===== */
+/* Breakpoints:
+   xs:  < 480px   (Android pequeño)
+   sm:  < 640px   (Android grande)
+   md:  < 768px   (Tablet portrait)
+   lg:  < 1024px  (Tablet landscape / laptop pequeño)
+   xl:  < 1280px  (Laptop)
+   2xl: < 1536px  (Desktop)
+   3xl: > 1800px  (Ultrawide)
+*/
+
+/* ── ULTRAWIDE (>1800px) ── */
+@media (min-width: 1800px) {
+    .container {
+        padding: 110px 6% 100px;
+        max-width: 2000px;
+    }
+
+    .movie-card {
+        width: clamp(200px, 14vw, 260px);
+    }
+
+    .banner-slider {
+        height: clamp(600px, 55vw, 960px);
+    }
+
+    .slide-title {
+        font-size: clamp(4rem, 5vw, 6rem);
+    }
+
+    .genre-title {
+        font-size: 1.9rem;
+    }
+}
+
+/* ── DESKTOP GRANDE (1280–1800px) ── */
+@media (min-width: 1280px) and (max-width: 1799px) {
+    .movie-card {
+        width: clamp(175px, 16vw, 240px);
+    }
+}
+
+/* ── LAPTOP / TABLET LANDSCAPE (1024px) ── */
+@media (max-width: 1024px) {
+    .container {
+        padding: 95px 5% 70px;
+    }
+
+    .banner-slider {
+        height: clamp(480px, 75vw, 700px);
+    }
+
+    .slide-content {
+        padding: 70px 7% 90px;
+        max-width: 80%;
+    }
+
+    .movie-card {
+        width: clamp(155px, 20vw, 210px);
+    }
+}
+
+/* ── TABLET PORTRAIT (768px) ── */
+@media (max-width: 768px) {
+    /* Navbar */
+    .navbar { padding: 14px 4%; }
+    .navbar.scrolled { padding: 10px 4%; }
+    .logo { font-size: 1.3rem; }
+    .logo-mark { width: 28px; height: 28px; }
+
+    /* Banner */
+    .banner-slider { height: 620px; }
+    .slide-content {
+        padding: 65px 5% 85px;
+        justify-content: flex-end;
+        max-width: 100%;
+        gap: 14px;
+    }
+    .slide-title { font-size: clamp(1.9rem, 7vw, 2.8rem); }
+    .slide-description { -webkit-line-clamp: 2; font-size: 0.9rem; }
+    .slide-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    .slide-actions .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 13px 24px;
+    }
+    .slider-controls {
+        right: 50%;
+        transform: translateX(50%);
+        bottom: 28px;
+    }
+
+    /* Container */
+    .container { padding: 80px 4% 60px; }
+
+    /* Search */
+    .search-filter-container { padding: 20px; gap: 16px; }
+    #search-input { padding: 14px 16px 14px 46px; font-size: 0.95rem; }
+
+    /* Cards */
+    .carousel-arrow { display: none; }
+    .movies-grid { gap: 12px; padding: 8px 2px 20px; }
+    .movie-card { width: clamp(140px, 42vw, 185px); }
+    .movie-info { padding: 12px; }
+    .movie-title { font-size: 0.88rem; }
+    .movie-metadata { font-size: 0.75rem; }
+
+    /* Genre sections */
+    .genre-section { margin-bottom: 38px; }
+    .genre-title { font-size: 1.25rem; }
+
+    /* Cart */
+    .cart-sidebar { max-width: 100%; width: 100%; }
+
+    /* Modal */
+    .modal { padding: 0; align-items: flex-end; }
+    .modal-content {
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        max-height: 95vh;
+    }
+    .modal-body { padding: 20px; }
+    .modal-hero-content { left: 20px; bottom: 22px; max-width: 85%; }
+    .modal-play-btn { right: 20px; width: 56px; height: 56px; font-size: 1.3rem; }
+    .modal-title { font-size: 1.5rem; }
+    .modal-actions { flex-direction: column; }
+    .modal-actions .btn { width: 100%; justify-content: center; }
+
+    /* Buttons */
+    .btn { padding: 13px 26px; font-size: 0.95rem; }
+}
+
+/* ── ANDROID GRANDE (640px) ── */
+@media (max-width: 640px) {
+    .banner-slider { height: 580px; }
+    .slide-title { font-size: clamp(1.7rem, 8vw, 2.4rem); }
+    .slide-badge { font-size: 0.65rem; padding: 6px 12px; letter-spacing: 1.5px; }
+    .slide-meta { gap: 6px; }
+    .slide-meta-item { font-size: 0.8rem; padding: 4px 10px; }
+
+    .movie-card { width: clamp(135px, 44vw, 175px); }
+
+    .genre-header { margin-bottom: 16px; }
+    .genre-count { display: none; }
+
+    .search-filter-container { padding: 16px; border-radius: var(--radius-md); }
+    .btn-filter { padding: 8px 16px; font-size: 0.82rem; }
+}
+
+/* ── ANDROID PEQUEÑO (480px) ── */
+@media (max-width: 480px) {
+    /* Navbar */
+    .navbar { padding: 12px 4%; }
+    .logo-text { font-size: 1.15rem; }
+    .logo-premium { font-size: 0.38em; letter-spacing: 3px; }
+    .icon-btn { padding: 7px; font-size: 1.1rem; }
+    .icon-badge { width: 16px; height: 16px; font-size: 0.6rem; }
+
+    /* Banner */
+    .banner-slider { height: 540px; }
+    .slide-content { padding: 55px 4% 75px; gap: 12px; }
+    .slide-title { font-size: 1.7rem; }
+    .slide-description { display: none; }
+    .slide-actions .btn { padding: 12px 20px; font-size: 0.9rem; }
+
+    /* Container */
+    .container { padding: 72px 4% 50px; }
+
+    /* Cards */
+    .movie-card { width: clamp(128px, 46vw, 165px); }
+    .movie-info { padding: 10px 11px 12px; }
+    .movie-title { font-size: 0.83rem; margin-bottom: 5px; }
+    .movies-grid { gap: 10px; }
+
+    /* Search */
+    #search-input { padding: 12px 14px 12px 42px; font-size: 0.9rem; }
+    .search-icon { left: 14px; font-size: 1rem; }
+
+    /* Genre */
+    .genre-title { font-size: 1.1rem; }
+    .genre-section { margin-bottom: 30px; }
+
+    /* Buttons */
+    .btn { padding: 12px 22px; font-size: 0.9rem; }
+    .btn-lg { padding: 14px 28px; font-size: 0.95rem; }
+
+    /* Modal */
+    .modal-hero { height: 240px; }
+    .modal-title { font-size: 1.3rem; }
+    .modal-body { padding: 16px; }
+    .player-tabs { flex-direction: column; }
+
+    /* Cart */
+    .cart-header { padding: 20px 18px; }
+    .cart-items { padding: 14px 16px; }
+    .cart-footer { padding: 18px; }
+
+    /* Notifications */
+    .notification {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+        top: 74px;
+    }
+}
+
+/* ── SOPORTE NOTCH / SAFE AREA ── */
+@supports (padding: env(safe-area-inset-top)) {
+    .navbar {
+        padding-top: calc(14px + env(safe-area-inset-top));
+        padding-left: calc(5% + env(safe-area-inset-left));
+        padding-right: calc(5% + env(safe-area-inset-right));
+    }
+
+    .navbar.scrolled {
+        padding-top: calc(10px + env(safe-area-inset-top));
+    }
+
+    .mobile-drawer {
+        padding-top: calc(28px + env(safe-area-inset-top));
+        padding-bottom: calc(22px + env(safe-area-inset-bottom));
+    }
+
+    .cart-sidebar {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .splash-screen {
+        padding-top: env(safe-area-inset-top);
+    }
+}
+
+/* ── REDUCIR MOVIMIENTO (accesibilidad) ── */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .reveal, .reveal-left {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ── MODO LANDSCAPE MÓVIL ── */
+@media (max-height: 500px) and (orientation: landscape) {
+    .banner-slider { height: 100vw; max-height: 420px; }
+    .slide-content { padding: 50px 6% 50px; }
+    .slide-title { font-size: 1.6rem; }
+    .slide-description { display: none; }
+    .navbar { padding: 10px 4%; }
+}
+
+/* ── HOVER SOLO EN DISPOSITIVOS CON PUNTERO ── */
+@media (hover: none) {
+    .movie-card:hover {
+        transform: none;
+        box-shadow: var(--shadow-card);
+    }
+
+    .movie-card:hover .movie-poster {
+        transform: none;
+    }
+
+    .movie-overlay {
+        opacity: 1;
+        background: linear-gradient(0deg, rgba(11,16,32,0.85) 0%, transparent 50%);
+    }
+
+    .btn-watch-now {
+        display: flex;
+    }
+
+    .carousel-arrow { display: none !important; }
+    
+    /* Deshabilitar backdrop-filter en móvil para mejor rendimiento */
+    .search-filter-container,
+    .modal-content,
+    .cart-sidebar {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+}
+
+/* ── OPTIMIZACIONES DE RENDIMIENTO GPU ── */
+
+/* Promover capas GPU para elementos animados frecuentemente */
+.slide,
+.slide-bg,
+.movie-card,
+.modal-content,
+.cart-sidebar {
+    /* contain: layout style; */ /* Activar si no hay overflow issues */
+    transform: translateZ(0); /* Forzar capa GPU */
+}
+
+/* El drawer ya anima su propio transform (translateX) para abrir/cerrar,
+   así que NO se le puede forzar translateZ(0) acá: pisaría esa animación
+   por tener la misma especificidad y perder el "cerrado" real.
+   will-change logra la misma optimización de GPU sin tocar el transform. */
+.mobile-drawer {
+    will-change: transform;
+}
+
+/* Optimizar scroll en contenedores de carrusel */
+.movies-grid {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    contain: layout style;
+}
+
+/* Optimizar imágenes para no bloquear el hilo principal */
+.movie-poster {
+    content-visibility: auto;
+    contain-intrinsic-size: 220px 330px;
+}
+
+/* Optimizar secciones fuera del viewport */
+.genre-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 400px;
+}
+
+/* ── PRINT ── */
+@media print {
+    .splash-screen,
+    .navbar,
+    .cart-sidebar,
+    .mobile-drawer,
+    .modal,
+    .banner-slider {
+        display: none !important;
+    }
+    .container {
+        padding: 20px;
+    }
+}

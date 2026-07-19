@@ -1,0 +1,106 @@
+/* ===== FC MOVIES+ v2 — VARIABLES PREMIUM ===== */
+:root {
+    /* ── PALETA PRINCIPAL ── */
+    --bg-main:        #0B1020;
+    --bg-secondary:   #151B2D;
+    --bg-elevated:    #1A2236;
+    --bg-surface:     #1E2740;
+
+    --card-bg:        #151B2D;
+    --card-hover-bg:  #1E2740;
+
+    /* ── COLORES DE ACENTO ── */
+    --primary:        #5B8CFF;
+    --primary-hover:  #4A7AEE;
+    --primary-rgb:    91, 140, 255;
+
+    --secondary:      #7C4DFF;
+    --secondary-hover:#6A3DE8;
+    --secondary-rgb:  124, 77, 255;
+
+    --accent:         #00C896;
+    --accent-hover:   #00B085;
+    --accent-rgb:     0, 200, 150;
+
+    --danger:         #FF4D6D;
+    --danger-rgb:     255, 77, 109;
+
+    --warning:        #FFB830;
+    --warning-rgb:    255, 184, 48;
+
+    --success:        #00C896;
+
+    /* ── ALIAS COMPATIBILIDAD ── */
+    --accent-color:       var(--primary);
+    --accent-hover:       var(--primary-hover);
+    --accent-color-rgb:   var(--primary-rgb);
+    --secondary-color:    var(--secondary);
+    --secondary-light:    #9B6FFF;
+    --secondary-dark:     #6A3DE8;
+    --secondary-rgb:      var(--secondary-rgb);
+    --error-color:        var(--danger);
+    --success-color:      var(--accent);
+    --warning-color:      var(--warning);
+    --bg-main-rgb:        11, 16, 32;
+    --card-bg-rgb:        21, 27, 45;
+
+    /* ── TEXTO ── */
+    --text-main:      #FFFFFF;
+    --text-secondary: #BFC8DA;
+    --text-muted:     #7A8BA8;
+    --text-disabled:  #4A5568;
+
+    /* ── BORDES ── */
+    --border-color:       rgba(255, 255, 255, 0.08);
+    --border-color-soft:  rgba(91, 140, 255, 0.15);
+    --border-glow:        rgba(91, 140, 255, 0.35);
+
+    /* ── RADIOS ── */
+    --radius-card:    18px;
+    --radius-lg:      20px;
+    --radius-md:      14px;
+    --radius-sm:      8px;
+    --radius-xs:      6px;
+    --radius-pill:    100px;
+
+    /* ── SOMBRAS ── */
+    --shadow-xs:      0 2px 8px rgba(0, 0, 0, 0.25);
+    --shadow-soft:    0 8px 24px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-elegant: 0 20px 40px rgba(0, 0, 0, 0.45), 0 8px 16px rgba(0, 0, 0, 0.25);
+    --shadow-glow:    0 0 30px rgba(91, 140, 255, 0.25), 0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-card:    0 4px 20px rgba(0, 0, 0, 0.4);
+    --shadow-card-hover: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(91, 140, 255, 0.2);
+
+    /* ── GLASSMORPHISM ── */
+    --glass-bg:       rgba(11, 16, 32, 0.75);
+    --glass-bg-light: rgba(21, 27, 45, 0.6);
+    --glass-border:   rgba(255, 255, 255, 0.08);
+    --glass-blur:     blur(20px);
+    --glass-blur-sm:  blur(10px);
+
+    /* ── GRADIENTES ── */
+    --gradient-primary:   linear-gradient(135deg, var(--primary), var(--secondary));
+    --gradient-accent:    linear-gradient(135deg, var(--primary), var(--accent));
+    --gradient-dark:      linear-gradient(180deg, transparent 0%, var(--bg-main) 100%);
+    --gradient-hero:      linear-gradient(90deg, rgba(11,16,32,0.95) 0%, rgba(11,16,32,0.6) 55%, transparent 100%),
+                          linear-gradient(0deg, rgba(11,16,32,1) 0%, rgba(11,16,32,0) 45%);
+    --gradient-card:      linear-gradient(0deg, rgba(11,16,32,0.95) 0%, rgba(11,16,32,0.4) 55%, transparent 100%);
+    --gradient-surface:   linear-gradient(135deg, rgba(91,140,255,0.06) 0%, rgba(124,77,255,0.04) 100%);
+
+    /* ── TRANSICIONES ── */
+    --transition:         all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast:    all 0.18s ease;
+    --transition-slow:    all 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring:  all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* ── TIPOGRAFÍA ── */
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    /* ── Z-INDEX ── */
+    --z-base:    1;
+    --z-card:    10;
+    --z-nav:     1000;
+    --z-drawer:  1999;
+    --z-modal:   2000;
+    --z-toast:   3000;
+}

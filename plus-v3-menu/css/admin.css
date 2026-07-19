@@ -1,0 +1,307 @@
+/* ===== ADMIN PANEL v2 — PREMIUM ===== */
+.admin-modal-content {
+    max-width: 1200px !important;
+    width: 95% !important;
+}
+
+.admin-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.admin-tabs::-webkit-scrollbar { display: none; }
+
+.admin-tab {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 11px 22px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.88rem;
+    font-family: var(--font-main);
+    white-space: nowrap;
+    transition: var(--transition-fast);
+}
+
+.admin-tab:hover {
+    background: rgba(91, 140, 255, 0.1);
+    color: var(--primary);
+    border-color: rgba(91, 140, 255, 0.2);
+}
+
+.admin-tab.active {
+    background: var(--gradient-primary);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 6px 18px rgba(91, 140, 255, 0.35);
+}
+
+/* ── DASHBOARD ── */
+.admin-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin-bottom: 36px;
+}
+
+.admin-stat-card {
+    background: var(--card-bg);
+    background-image: var(--gradient-surface);
+    padding: 22px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: var(--transition-fast);
+}
+
+.admin-stat-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(91, 140, 255, 0.25);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.stat-icon {
+    font-size: 1.8rem;
+    background: rgba(91, 140, 255, 0.1);
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+}
+
+.stat-info h3 {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-info p {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--text-main);
+    margin: 4px 0 0;
+    letter-spacing: -0.02em;
+}
+
+/* ── CHARTS ── */
+.admin-charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 22px;
+    margin-bottom: 36px;
+}
+
+.chart-container {
+    background: var(--card-bg);
+    padding: 22px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    min-height: 340px;
+}
+
+.chart-container h3 {
+    font-size: 1rem;
+    margin-bottom: 18px;
+    color: var(--text-main);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+}
+
+/* ── FORMULARIOS ── */
+.admin-field {
+    margin-bottom: 18px;
+}
+
+.admin-field label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.admin-field input,
+.admin-field select,
+.admin-field textarea {
+    width: 100%;
+    background: rgba(11, 16, 32, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-main);
+    padding: 13px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-family: var(--font-main);
+    transition: var(--transition-fast);
+    caret-color: var(--primary);
+}
+
+.admin-field input:focus,
+.admin-field select:focus,
+.admin-field textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(11, 16, 32, 0.85);
+    box-shadow: 0 0 0 3px rgba(91, 140, 255, 0.1);
+}
+
+.admin-field select option {
+    background: var(--bg-secondary);
+    color: var(--text-main);
+}
+
+.admin-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.admin-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.admin-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+.admin-preview-img {
+    width: 110px;
+    height: 165px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    margin-top: 14px;
+    border: 2px solid rgba(91, 140, 255, 0.3);
+    box-shadow: var(--shadow-card);
+}
+
+/* ── LISTA DE PELÍCULAS ── */
+.admin-movies-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-movie-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 14px;
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition-fast);
+}
+
+.admin-movie-row:hover {
+    border-color: rgba(91, 140, 255, 0.2);
+    background: var(--bg-elevated);
+}
+
+.admin-movie-row img {
+    width: 46px;
+    height: 68px;
+    object-fit: cover;
+    border-radius: var(--radius-xs);
+    flex-shrink: 0;
+}
+
+.admin-movie-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.admin-movie-info strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-movie-info span {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+.admin-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.admin-icon-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    transition: var(--transition-fast);
+}
+
+.admin-icon-btn:hover {
+    background: rgba(91, 140, 255, 0.15);
+    border-color: rgba(91, 140, 255, 0.3);
+    color: var(--primary);
+    transform: scale(1.08);
+}
+
+.admin-icon-btn.danger:hover {
+    background: rgba(255, 77, 109, 0.15);
+    border-color: rgba(255, 77, 109, 0.3);
+    color: var(--danger);
+}
+
+/* Compras pendientes */
+.admin-compra-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    padding: 18px;
+    margin-bottom: 14px;
+    transition: var(--transition-fast);
+}
+
+.admin-compra-card:hover {
+    border-color: rgba(91, 140, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+    .admin-charts-grid  { grid-template-columns: 1fr; }
+    .admin-field-row    { grid-template-columns: 1fr; }
+    .admin-movie-row    { padding: 12px; gap: 12px; }
+    .admin-summary-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+    .admin-summary-grid { grid-template-columns: 1fr; }
+}

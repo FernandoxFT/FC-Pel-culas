@@ -1,0 +1,387 @@
+/* ===== MODAL v2 — PREMIUM ===== */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: var(--z-modal);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.3s ease-out;
+    /* Optimizar capa GPU */
+    will-change: opacity;
+    contain: layout;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--bg-secondary);
+    background-image: var(--gradient-surface);
+    border-radius: var(--radius-lg);
+    max-width: 1000px;
+    width: 100%;
+    max-height: 92vh;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(91, 140, 255, 0.08);
+    position: relative;
+    scrollbar-width: none;
+    animation: scaleIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-content::-webkit-scrollbar { display: none; }
+
+/* Hero del modal */
+.modal-hero {
+    position: relative;
+    width: 100%;
+    height: clamp(280px, 52vw, 460px);
+    background-size: cover;
+    background-position: center 20%;
+    background-color: var(--bg-main);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    overflow: hidden;
+}
+
+.modal-hero-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(0deg, var(--bg-secondary) 0%, rgba(21, 27, 45, 0.5) 45%, transparent 100%),
+        linear-gradient(180deg, rgba(11, 16, 32, 0.4) 0%, transparent 30%);
+}
+
+/* Botones icono del modal */
+.modal-icon-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    background: rgba(11, 16, 32, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    z-index: calc(var(--z-modal) + 1);
+}
+
+.modal-icon-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: scale(1.1);
+    box-shadow: 0 4px 16px rgba(91, 140, 255, 0.4);
+}
+
+.modal-back {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+}
+
+.modal-hero-actions {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    display: flex;
+    gap: 10px;
+}
+
+.modal-hero-content {
+    position: absolute;
+    left: 36px;
+    bottom: 36px;
+    z-index: 10;
+    max-width: 70%;
+}
+
+.modal-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--warning);
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.modal-title {
+    font-size: clamp(1.6rem, 4.5vw, 2.8rem);
+    font-weight: 900;
+    color: white;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+
+/* Botón play */
+.modal-play-btn {
+    position: absolute;
+    right: 36px;
+    bottom: 20px;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 10px 32px rgba(91, 140, 255, 0.55);
+    transition: var(--transition-spring);
+    z-index: 15;
+}
+
+.modal-play-btn:hover {
+    transform: scale(1.12);
+    box-shadow: 0 16px 44px rgba(91, 140, 255, 0.7);
+}
+
+/* Cuerpo del modal */
+.modal-body {
+    padding: 36px;
+    padding-top: 12px;
+}
+
+.modal-meta {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+}
+
+.modal-meta-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 5px 13px;
+    border-radius: var(--radius-xs);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.modal-description {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 28px;
+    font-size: 1rem;
+}
+
+/* Tabs del player */
+.player-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.player-tab {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-muted);
+    padding: 13px;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 0.9rem;
+    font-family: var(--font-main);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.player-tab:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-main);
+}
+
+.player-tab.active {
+    background: var(--gradient-primary);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 16px rgba(91, 140, 255, 0.3);
+}
+
+/* Video player */
+.video-player {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+    border-radius: var(--radius-md);
+    margin-bottom: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.modal-price {
+    font-size: 1.9rem;
+    color: var(--primary);
+    font-weight: 900;
+    margin-bottom: 22px;
+    letter-spacing: -0.02em;
+}
+
+/* ===== BOTONES GLOBALES v2 — PREMIUM ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 34px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: var(--font-main);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    border: none;
+    background: var(--gradient-primary);
+    color: white;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.25s ease,
+                filter 0.2s ease;
+    box-shadow: 0 8px 24px rgba(91, 140, 255, 0.35);
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Capa de brillo en hover */
+.btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 14px 36px rgba(91, 140, 255, 0.5);
+}
+
+.btn:hover::after {
+    opacity: 1;
+}
+
+.btn:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 4px 14px rgba(91, 140, 255, 0.3);
+}
+
+/* Ripple effect */
+.btn .ripple-wave {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Variantes de botón */
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-main);
+    box-shadow: none;
+}
+
+.btn-secondary::after { display: none; }
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.22);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn-accent {
+    background: linear-gradient(135deg, var(--accent), var(--primary));
+    box-shadow: 0 8px 24px rgba(0, 200, 150, 0.35);
+}
+
+.btn-accent:hover {
+    box-shadow: 0 14px 36px rgba(0, 200, 150, 0.5);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, var(--danger), #FF6B8A);
+    box-shadow: 0 8px 24px rgba(255, 77, 109, 0.35);
+}
+
+.btn-danger:hover {
+    box-shadow: 0 14px 36px rgba(255, 77, 109, 0.5);
+}
+
+.btn-sm {
+    padding: 9px 20px;
+    font-size: 0.85rem;
+    border-radius: var(--radius-sm);
+}
+
+.btn-lg {
+    padding: 18px 44px;
+    font-size: 1.1rem;
+    border-radius: var(--radius-lg);
+}
+
+.btn-icon {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: var(--radius-sm);
+}
+
+/* Botón de cierre del modal */
+.modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    cursor: pointer;
+    z-index: calc(var(--z-modal) + 2);
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.modal-close:hover {
+    background: rgba(255, 77, 109, 0.2);
+    border-color: var(--danger);
+    color: var(--danger);
+    transform: rotate(90deg);
+}
+
+/* Acciones del modal */
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .modal-body { padding: 22px; }
+    .modal-hero-content { left: 20px; bottom: 24px; max-width: 85%; }
+    .modal-play-btn { right: 20px; width: 58px; height: 58px; font-size: 1.3rem; }
+    .modal-title { font-size: 1.5rem; }
+    .modal-actions { flex-direction: column; }
+    .modal-actions .btn { width: 100%; justify-content: center; }
+}

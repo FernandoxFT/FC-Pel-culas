@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>FC Movies+ | Tu Plataforma Premium de Streaming</title>
+    <meta name="description" content="Disfruta de las mejores películas en 4K Ultra HD. Catálogo exclusivo con estrenos y clásicos en FC Movies+.">
+    <meta name="theme-color" content="#0B1020" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#0B1020">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icons/icon-192.png" type="image/png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FC Movies+">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FC Movies+ | Streaming Premium">
+    <meta property="og:description" content="Disfruta de las mejores películas en 4K Ultra HD.">
+    <meta property="og:image" content="icons/icon-512.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Preconnect para recursos externos críticos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+    <!-- Fuente Inter con display=swap para evitar FOIT -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"></noscript>
+
+    <!-- CSS crítico inline (variables + base mínima para splash) -->
+    <style>
+        /* Variables críticas para el splash */
+        :root {
+            --bg-main: #0B1020;
+            --primary: #5B8CFF;
+            --secondary: #7C4DFF;
+            --accent: #00C896;
+            --text-main: #FFFFFF;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        /* Reset mínimo */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        /* Splash crítico */
+        .splash-screen {
+            position: fixed; inset: 0; z-index: 9999;
+            background: radial-gradient(ellipse 80% 80% at 50% 50%, #0f1830 0%, #0B1020 100%);
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .splash-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    </style>
+
+    <!-- CSS principal diferido (no bloquea render) -->
+    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
+
+    <!-- Preload del JS de configuración (crítico) -->
+    <link rel="preload" href="js/config.js" as="script">
+    <link rel="preload" href="js/app.js" as="script">
+
+    <!-- Supabase cargado de forma asíncrona -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <!-- Chart.js cargado solo cuando se necesita (ver admin.js) -->
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-ring"></div>
+        <div class="splash-ring"></div>
+        <div class="splash-ring"></div>
+        <div class="splash-flash"></div>
+
+        <div class="splash-content">
+            <div class="splash-shield-wrap">
+                <svg class="splash-shield" viewBox="0 0 220 220" aria-hidden="true">
+                    <path class="splash-shield-fill"
+                        d="M110 12 L195 45 V110 C195 165 158 198 110 210 C62 198 25 165 25 110 V45 Z"/>
+                    <path class="splash-shield-outline"
+                        d="M110 12 L195 45 V110 C195 165 158 198 110 210 C62 198 25 165 25 110 V45 Z"/>
+                    <path class="splash-shield-gold"
+                        d="M110 22 L185 52 V110 C185 158 152 188 110 199 C68 188 35 158 35 110 V52 Z"/>
+                </svg>
+                <h1 class="splash-logo">FC<span>MOVIES+</span></h1>
+            </div>
+            <div class="splash-loader" role="progressbar" aria-label="Cargando"></div>
+            <p class="splash-subtitle">Preparando tu experiencia</p>
+        </div>
+
+        <button id="splash-sound-btn" type="button" aria-label="Activar sonido de bienvenida">🔈 Sonido</button>
+    </div>
+
+    <!-- NAVBAR -->
+    <header role="banner">
+        <nav class="navbar" role="navigation" aria-label="Navegación principal">
+            <a href="#" class="logo" aria-label="FC Movies+ - Inicio">
+                <svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0" stop-color="var(--accent-color)"/>
+                            <stop offset="1" stop-color="var(--secondary-color)"/>
+                        </linearGradient>
+                    </defs>
+                    <rect x="2" y="2" width="44" height="44" rx="13" fill="url(#logoGrad)"/>
+                    <path d="M19 15.5 L33 24 L19 32.5 Z" fill="#F8FAFC"/>
+                </svg>
+                <span class="logo-text">FC<span class="logo-premium">MOVIES+</span></span>
+            </a>
+            <div class="nav-right">
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-drawer">☰</button>
+                <button class="icon-btn" id="favorites-toggle" title="Mis Favoritos" aria-label="Mis Favoritos" type="button">
+                    ❤️
+                    <span class="icon-badge favorites-count" id="favorites-count" aria-live="polite">0</span>
+                </button>
+                <button class="btn-plan" id="btn-plan-navbar" onclick="openPlanesModal()" type="button">🎫 Planes</button>
+                <button class="btn-login btn-admin-navbar" id="btn-admin-navbar" onclick="openAdminModal()" style="display:none;" title="Panel de Administración" type="button" aria-label="Panel de Administración">⚙️ Admin</button>
+                <button class="btn-login" id="btn-login-navbar" onclick="openLoginModal()" title="Mi Perfil" type="button" aria-label="Iniciar sesión o ver perfil">👤 Iniciar</button>
+                <button class="icon-btn" id="cart-toggle" title="Mi Carrito" aria-label="Mi Carrito" type="button">
+                    🛒
+                    <span class="icon-badge" id="cart-count" aria-live="polite">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MENÚ LATERAL MÓVIL -->
+    <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" aria-hidden="true"></div>
+    <nav class="mobile-drawer" id="mobile-drawer" aria-label="Menú móvil" aria-hidden="true">
+        <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Cerrar menú">✕</button>
+
+        <div class="mobile-drawer-scroll">
+            <button class="mobile-drawer-item" id="drawer-plan" type="button">🎫 Planes</button>
+            <button class="mobile-drawer-item" id="drawer-login" type="button">👤 Mi Perfil</button>
+            <button class="mobile-drawer-item drawer-admin-item" id="drawer-admin" style="display:none;" type="button">⚙️ Panel de Administración</button>
+
+            <div class="mobile-drawer-divider"></div>
+
+            <button class="mobile-drawer-item" id="drawer-favoritos" type="button">❤️ Mis Favoritos</button>
+            <button class="mobile-drawer-item" id="drawer-install" type="button">⬇️ Descargar la App</button>
+            <button class="mobile-drawer-item" id="drawer-rate" type="button">⭐ Calificar la App</button>
+            <button class="mobile-drawer-item" id="drawer-contact" type="button">✉️ Mensaje al Desarrollador</button>
+
+            <div class="mobile-drawer-divider"></div>
+
+            <button class="mobile-drawer-item" id="drawer-settings" type="button">🔧 Ajustes</button>
+        </div>
+
+        <p class="mobile-drawer-version" id="drawer-version">FC Movies+ —</p>
+    </nav>
+
+    <div id="avisos-container" aria-live="polite"></div>
+
+    <!-- BANNER DINÁMICO -->
+    <section class="banner-slider" id="banner-slider" aria-label="Películas destacadas"></section>
+
+    <!-- MAIN CONTENT -->
+    <main class="container" id="main-content" role="main">
+        <!-- SEARCH & FILTER -->
+        <section class="search-filter-container" aria-label="Buscar y filtrar películas">
+            <div class="search-wrapper">
+                <span class="search-icon" aria-hidden="true">🔍</span>
+                <input type="search" id="search-input" placeholder="Busca tu película favorita..."
+                       autocomplete="off" aria-label="Buscar películas" aria-autocomplete="list"
+                       aria-controls="search-suggestions">
+                <div class="search-suggestions" id="search-suggestions" role="listbox" aria-label="Sugerencias de búsqueda"></div>
+            </div>
+            <div class="filter-genres" role="group" aria-label="Filtrar por género" id="filter-genres">
+                <button class="btn-filter active" data-genre="todos" onclick="filterByGenre(event)" type="button">Todos</button>
+            </div>
+        </section>
+
+        <!-- HOME HIGHLIGHT SECTIONS -->
+        <div id="home-sections-container"></div>
+
+        <!-- GENRE SECTIONS -->
+        <div id="genre-sections-container"></div>
+    </main>
+
+    <!-- MOVIE DETAIL MODAL -->
+    <div class="modal" id="movie-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <div class="modal-hero" id="modal-hero">
+                <button class="modal-icon-btn modal-back" onclick="closeMovieModal()" aria-label="Volver al catálogo" type="button">←</button>
+                <div class="modal-hero-actions">
+                    <button class="modal-icon-btn" id="modal-favorite-btn" onclick="toggleFavoriteFromModal()" aria-label="Agregar a favoritos" type="button">♡</button>
+                    <button class="modal-icon-btn" onclick="compartirPelicula()" aria-label="Compartir película" type="button">⤴</button>
+                </div>
+                <div class="modal-hero-gradient"></div>
+                <div class="modal-hero-content">
+                    <div class="modal-rating" id="modal-rating"></div>
+                    <h2 class="modal-title" id="modal-title"></h2>
+                </div>
+                <button class="modal-play-btn" onclick="intentarVerPelicula()" aria-label="Reproducir película" type="button">▶</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-meta" id="modal-meta"></div>
+
+                <div class="player-tabs" id="player-tabs" role="tablist">
+                    <button class="player-tab active" id="tab-trailer" onclick="mostrarTrailer()" role="tab" aria-selected="true" type="button">🎬 Trailer</button>
+                    <button class="player-tab" id="tab-completa" onclick="intentarVerPelicula()" role="tab" aria-selected="false" type="button">🔒 Película Completa</button>
+                </div>
+
+                <div class="video-player" id="video-player" aria-live="polite"></div>
+                <p class="modal-description" id="modal-description"></p>
+                <div class="modal-price" id="modal-price"></div>
+                <div class="modal-actions">
+                    <button class="btn" id="btn-agregar-modal" onclick="addToCartFromModal()" type="button">🛒 Agregar al Carrito</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART SIDEBAR -->
+    <aside class="cart-sidebar" id="cart-sidebar" role="complementary" aria-label="Carrito de compras">
+        <div class="cart-header">
+            <h2>🛒 Carrito</h2>
+            <button onclick="closeCart()" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer; padding: 0;" aria-label="Cerrar carrito" type="button">×</button>
+        </div>
+        <div class="cart-items" id="cart-items-list" aria-live="polite"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="cart-total-price" id="cart-total">Gs. 0</span>
+            </div>
+            <button class="btn-checkout" onclick="openTransferModal()" style="background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));" type="button">🏦 Transferencia Bancaria</button>
+            <button class="btn-checkout" onclick="procesarWhatsApp()" type="button">📱 WhatsApp</button>
+        </div>
+    </aside>
+
+    <!-- ADMIN MODAL -->
+    <div class="modal" id="admin-modal" role="dialog" aria-modal="true" aria-labelledby="admin-modal-title">
+        <div class="modal-content admin-modal-content">
+            <button class="modal-close" onclick="closeAdminModal()" aria-label="Cerrar panel de administración" type="button">&times;</button>
+            <div class="modal-body">
+                <h2 class="modal-title" id="admin-modal-title">⚙️ Panel de Administración</h2>
+
+                <div class="admin-tabs" role="tablist">
+                    <button class="admin-tab active" id="admin-tab-dashboard" onclick="mostrarAdminTab('dashboard')" role="tab" aria-selected="true" type="button">📊 Dashboard</button>
+                    <button class="admin-tab" id="admin-tab-compras" onclick="mostrarAdminTab('compras')" role="tab" aria-selected="false" type="button">💸 Compras</button>
+                    <button class="admin-tab" id="admin-tab-lista" onclick="mostrarAdminTab('lista')" role="tab" aria-selected="false" type="button">🎬 Películas</button>
+                    <button class="admin-tab" id="admin-tab-form" onclick="mostrarAdminTab('form')" role="tab" aria-selected="false" type="button">➕ Nueva Película</button>
+                </div>
+
+                <!-- DASHBOARD VIEW -->
+                <div id="admin-view-dashboard">
+                    <div id="admin-summary-grid" class="admin-summary-grid"></div>
+                    <div class="admin-charts-grid">
+                        <div class="chart-container">
+                            <h3>Ingresos (Últimos 7 días)</h3>
+                            <canvas id="chart-ingresos" aria-label="Gráfico de ingresos" role="img"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h3>Ventas Diarias</h3>
+                            <canvas id="chart-ventas" aria-label="Gráfico de ventas diarias" role="img"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h3>Top 5 Películas</h3>
+                            <canvas id="chart-top-movies" aria-label="Gráfico top 5 películas" role="img"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h3>Distribución de Planes</h3>
+                            <canvas id="chart-planes" aria-label="Gráfico distribución de planes" role="img"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COMPRAS PENDIENTES -->
+                <div id="admin-view-compras" style="display:none;">
+                    <div id="admin-compras-list"></div>
+                </div>
+
+                <!-- LISTA DE PELÍCULAS -->
+                <div id="admin-view-lista" style="display:none;">
+                    <div id="admin-movies-list" class="admin-movies-list"></div>
+                </div>
+
+                <!-- FORMULARIO -->
+                <div id="admin-view-form" style="display:none;">
+                    <form id="admin-form" onsubmit="adminGuardarPelicula(event)">
+                        <input type="hidden" id="admin-id">
+                        <div class="admin-field">
+                            <label for="admin-titulo">Título</label>
+                            <input type="text" id="admin-titulo" required autocomplete="off">
+                        </div>
+                        <div class="admin-field-row">
+                            <div class="admin-field">
+                                <label for="admin-anio">Año</label>
+                                <input type="number" id="admin-anio" required min="1900" max="2099">
+                            </div>
+                            <div class="admin-field">
+                                <label for="admin-rating">Rating (0-10)</label>
+                                <input type="number" step="0.1" min="0" max="10" id="admin-rating">
+                            </div>
+                        </div>
+                        <div class="admin-field-row">
+                            <div class="admin-field">
+                                <label for="admin-genero">Género</label>
+                                <select id="admin-genero">
+                                    <option>Acción</option>
+                                    <option>Ciencia Ficción</option>
+                                    <option>Drama</option>
+                                    <option>Thriller</option>
+                                    <option>Animación</option>
+                                    <option>Terror</option>
+                                    <option>Comedia</option>
+                                    <option>Otro</option>
+                                </select>
+                            </div>
+                            <div class="admin-field">
+                                <label for="admin-calidad">Calidad</label>
+                                <select id="admin-calidad">
+                                    <option>720p HD</option>
+                                    <option>1080p HD</option>
+                                    <option>4K ULTRA HD</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="admin-field">
+                            <label for="admin-director">Director</label>
+                            <input type="text" id="admin-director" autocomplete="off">
+                        </div>
+                        <div class="admin-field">
+                            <label for="admin-descripcion">Descripción</label>
+                            <textarea id="admin-descripcion" rows="3"></textarea>
+                        </div>
+                        <div class="admin-field">
+                            <label for="admin-trailer">Trailer (URL embed de YouTube)</label>
+                            <input type="url" id="admin-trailer" placeholder="https://www.youtube.com/embed/...">
+                        </div>
+                        <div class="admin-field-row">
+                            <div class="admin-field">
+                                <label for="admin-precio">Precio (Gs.)</label>
+                                <input type="number" id="admin-precio" required min="0">
+                            </div>
+                            <div class="admin-field">
+                                <label for="admin-precio-oferta">Precio de oferta (opcional)</label>
+                                <input type="number" id="admin-precio-oferta" placeholder="Dejar vacío si no hay oferta" min="0">
+                            </div>
+                        </div>
+                        <div class="admin-field-row">
+                            <label class="admin-checkbox"><input type="checkbox" id="admin-gratis"> Es gratis</label>
+                            <label class="admin-checkbox"><input type="checkbox" id="admin-estreno"> Marcar como Estreno</label>
+                        </div>
+                        <div class="admin-field">
+                            <label for="admin-portada-file">Portada (imagen)</label>
+                            <input type="file" id="admin-portada-file" accept="image/*">
+                            <img id="admin-portada-preview" class="admin-preview-img" style="display:none;" alt="Vista previa de portada">
+                        </div>
+                        <div class="admin-field">
+                            <label for="admin-video-file">Video de la película (opcional)</label>
+                            <input type="file" id="admin-video-file" accept="video/*">
+                            <p class="admin-current-file" id="admin-video-current"></p>
+                        </div>
+                        <p id="admin-form-msg" class="admin-form-msg" aria-live="polite"></p>
+                        <div class="admin-form-actions">
+                            <button type="submit" class="btn" id="admin-btn-guardar">Guardar</button>
+                            <button type="button" class="btn btn-secondary" onclick="adminResetForm()">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROFILE MODAL -->
+    <div class="modal" id="profile-modal" role="dialog" aria-modal="true" aria-labelledby="profile-name">
+        <div class="modal-content" style="max-width: 480px;">
+            <button class="modal-close" onclick="closeProfileModal()" aria-label="Cerrar perfil" type="button">&times;</button>
+            <div class="modal-body">
+                <div class="profile-header">
+                    <div class="profile-avatar" id="profile-avatar" aria-hidden="true">U</div>
+                    <div class="profile-header-info">
+                        <h2 class="profile-name" id="profile-name">—</h2>
+                        <p class="profile-email" id="profile-email">—</p>
+                        <p class="profile-since" id="profile-since"></p>
+                    </div>
+                </div>
+                <div class="profile-section">
+                    <h3 class="profile-section-title">🎫 Mi Plan</h3>
+                    <p class="plan-estado" id="profile-plan-estado"></p>
+                    <button class="btn btn-secondary" style="width: 100%;" onclick="closeProfileModal(); openPlanesModal();" id="profile-btn-plan" type="button">Ver planes disponibles</button>
+                </div>
+                <div class="profile-section">
+                    <h3 class="profile-section-title">🎬 Mis Películas</h3>
+                    <div id="profile-compras-list" class="profile-compras-list">
+                        <p class="profile-empty-text">Todavía no has adquirido ninguna película.</p>
+                    </div>
+                </div>
+                <div class="profile-section">
+                    <h3 class="profile-section-title">⚙️ Ajustes de Cuenta</h3>
+                    <button class="btn-profile-action" onclick="closeProfileModal(); openLoginModal(); openForgotPassword(new Event('click'));" type="button">Cambiar contraseña</button>
+                    <button class="btn-profile-action profile-logout" onclick="cerrarSesion(); closeProfileModal();" type="button">Cerrar sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAVORITOS MODAL -->
+    <div class="modal" id="favorites-modal" role="dialog" aria-modal="true" aria-labelledby="favorites-modal-title">
+        <div class="modal-content" style="max-width: 720px;">
+            <button class="modal-close" onclick="closeFavoritesModal()" aria-label="Cerrar favoritos" type="button">&times;</button>
+            <div class="modal-body">
+                <h2 class="modal-title" id="favorites-modal-title">❤️ Mis Favoritos</h2>
+                <div id="favorites-modal-grid" class="favorites-grid">
+                    <p class="profile-empty-text">Todavía no agregaste ninguna película a favoritos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AJUSTES MODAL -->
+    <div class="modal" id="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settings-modal-title">
+        <div class="modal-content" style="max-width: 480px;">
+            <button class="modal-close" onclick="closeSettingsModal()" aria-label="Cerrar ajustes" type="button">&times;</button>
+            <div class="modal-body">
+                <h2 class="modal-title" id="settings-modal-title">🔧 Ajustes</h2>
+
+                <div class="profile-section">
+                    <h3 class="profile-section-title">📶 Conexión a Internet</h3>
+                    <p class="settings-hint">¿Se traba el video o tarda en cargar? Probá tu conexión.</p>
+                    <button class="btn btn-secondary" style="width:100%;" id="btn-test-connection" type="button">Probar mi conexión</button>
+                    <div id="connection-result" class="connection-result" style="display:none;"></div>
+                </div>
+
+                <div class="profile-section">
+                    <h3 class="profile-section-title">🎞️ Calidad de Reproducción</h3>
+                    <p class="settings-hint">Con datos móviles o wifi lento, elegí una calidad menor para que no se trabe.</p>
+                    <div class="quality-options" id="quality-options" role="radiogroup" aria-label="Calidad de video">
+                        <button class="quality-option" data-quality="alta" type="button">
+                            <span class="quality-option-label">Máxima calidad</span>
+                            <span class="quality-option-desc">Mejor imagen · más datos</span>
+                        </button>
+                        <button class="quality-option" data-quality="media" type="button">
+                            <span class="quality-option-label">Media</span>
+                            <span class="quality-option-desc">Equilibrio recomendado</span>
+                        </button>
+                        <button class="quality-option" data-quality="baja" type="button">
+                            <span class="quality-option-label">Ahorro de datos</span>
+                            <span class="quality-option-desc">Para wifi o datos lentos</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <h3 class="profile-section-title">🧹 Mantenimiento</h3>
+                    <p class="settings-hint">Si la app se ve rara o desactualizada después de una actualización, borrá el caché.</p>
+                    <button class="btn-profile-action" id="btn-clear-cache" type="button">Borrar caché de la app</button>
+                </div>
+
+                <p class="settings-version" id="settings-version">FC Movies+ —</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CALIFICAR MODAL -->
+    <div class="modal" id="rating-modal" role="dialog" aria-modal="true" aria-labelledby="rating-modal-title">
+        <div class="modal-content" style="max-width: 420px;">
+            <button class="modal-close" onclick="closeRatingModal()" aria-label="Cerrar calificación" type="button">&times;</button>
+            <div class="modal-body">
+                <h2 class="modal-title" id="rating-modal-title">⭐ ¿Qué te parece FC Movies+?</h2>
+                <div class="rating-stars" id="rating-stars" role="radiogroup" aria-label="Calificación en estrellas">
+                    <button class="rating-star" data-value="1" type="button" aria-label="1 estrella">★</button>
+                    <button class="rating-star" data-value="2" type="button" aria-label="2 estrellas">★</button>
+                    <button class="rating-star" data-value="3" type="button" aria-label="3 estrellas">★</button>
+                    <button class="rating-star" data-value="4" type="button" aria-label="4 estrellas">★</button>
+                    <button class="rating-star" data-value="5" type="button" aria-label="5 estrellas">★</button>
+                </div>
+                <textarea id="rating-comment" class="rating-comment" placeholder="Contanos qué te gustó o qué mejorarías (opcional)" rows="3"></textarea>
+                <button class="btn" style="width:100%;" id="btn-submit-rating" type="button">Enviar calificación</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div class="modal" id="login-modal" role="dialog" aria-modal="true" aria-labelledby="login-modal-title">
+        <div class="modal-content" style="max-width: 400px;">
+            <button class="modal-close" onclick="closeLoginModal()" aria-label="Cerrar inicio de sesión" type="button">&times;</button>
+            <div class="modal-body" id="login-view-main">
+                <h2 class="modal-title" id="login-modal-title">¡Bienvenido!</h2>
+                <p style="text-align:center; color:var(--text-muted); margin-bottom:20px;">Inicia sesión para disfrutar de FC Movies+.</p>
+                <div class="auth-social">
+                    <button class="btn-social google" onclick="loginSocial('google')" type="button">Google</button>
+                    <button class="btn-social facebook" onclick="loginSocial('facebook')" type="button">Facebook</button>
+                </div>
+                <div class="auth-divider"><span>o usa tu correo</span></div>
+                <form onsubmit="loginEmail(event)" novalidate>
+                    <div class="admin-field">
+                        <label for="login-email" class="sr-only">Correo electrónico</label>
+                        <input type="email" id="login-email" placeholder="Correo electrónico" required autocomplete="email">
+                    </div>
+                    <div class="admin-field">
+                        <label for="login-pass" class="sr-only">Contraseña</label>
+                        <input type="password" id="login-pass" placeholder="Contraseña" required autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="btn" style="width:100%;">Ingresar</button>
+                </form>
+                <p style="text-align:center; margin-top:15px; font-size:0.9rem;">
+                    <a href="#" onclick="openForgotPassword(event)" style="color:var(--secondary-light);">¿Olvidaste tu contraseña?</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PLANES MODAL -->
+    <div class="modal" id="planes-modal" role="dialog" aria-modal="true" aria-labelledby="planes-modal-title">
+        <div class="modal-content" style="max-width: 480px;">
+            <button class="modal-close" onclick="closePlanesModal()" aria-label="Cerrar planes" type="button">&times;</button>
+            <div class="modal-body">
+                <h2 class="modal-title" id="planes-modal-title">Elige tu Plan Premium</h2>
+                <div class="planes-grid">
+                    <div class="plan-card" onclick="elegirPlan('quincenal')" role="button" tabindex="0">
+                        <h3>Quincenal</h3>
+                        <div class="plan-price">Gs. 25.000</div>
+                        <ul>
+                            <li>15 días de acceso total</li>
+                            <li>Todo el catálogo incluido</li>
+                            <li>Calidad 4K Ultra HD</li>
+                        </ul>
+                        <button class="btn" type="button">Suscribirme</button>
+                    </div>
+                    <div class="plan-card featured" onclick="elegirPlan('mensual')" role="button" tabindex="0">
+                        <div class="plan-badge">MÁS POPULAR</div>
+                        <h3>Mensual</h3>
+                        <div class="plan-price">Gs. 45.000</div>
+                        <ul>
+                            <li>30 días de acceso total</li>
+                            <li>Todo el catálogo incluido</li>
+                            <li>Calidad 4K Ultra HD</li>
+                        </ul>
+                        <button class="btn" type="button">Suscribirme</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TRANSFER MODAL -->
+    <div class="modal" id="transfer-modal" role="dialog" aria-modal="true" aria-labelledby="transfer-modal-title">
+        <div class="modal-content" style="max-width: 450px;">
+            <button class="modal-close" onclick="closeTransferModal()" aria-label="Cerrar transferencia" type="button">&times;</button>
+            <div class="modal-body">
+                <h2 class="modal-title" id="transfer-modal-title">🏦 Transferencia Bancaria</h2>
+                <div class="transfer-info">
+                    <p><strong>Banco:</strong> Itaú</p>
+                    <p><strong>Cuenta:</strong> 123456789</p>
+                    <p><strong>Titular:</strong> FC MOVIES+</p>
+                    <p><strong>RUC:</strong> 80000000-0</p>
+                </div>
+                <div class="admin-field">
+                    <label for="input-comprobante">Adjuntar Comprobante</label>
+                    <input type="file" id="input-comprobante" accept="image/*">
+                    <label id="comprobante-label" for="input-comprobante" class="comprobante-dropzone">
+                        <span>Click para subir foto</span>
+                    </label>
+                    <img id="comprobante-preview" style="display:none; width:100%; margin-top:10px; border-radius:8px;" alt="Vista previa del comprobante">
+                </div>
+                <button class="btn" onclick="confirmarTransferencia()" style="width:100%;" type="button">Confirmar Pago</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skip to main content (accesibilidad) -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+    <!-- SCRIPTS — cargados con defer para no bloquear el render -->
+    <script src="js/config.js" defer></script>
+    <script src="js/movies.js" defer></script>
+    <script src="js/favorites.js" defer></script>
+    <script src="js/cart.js" defer></script>
+    <script src="js/player.js" defer></script>
+    <script src="js/plans.js" defer></script>
+    <script src="js/payments.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/admin.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/app.js" defer></script>
+    <script src="js/menu-extra.js" defer></script>
+    <script src="js/mobile-menu.js" defer></script>
+    <script src="js/pwa.js" defer></script>
+</body>
+</html>

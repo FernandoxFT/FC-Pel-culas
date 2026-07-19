@@ -1,0 +1,533 @@
+/* ===== CONTAINER & LAYOUT ===== */
+.container {
+    padding: 100px 5% 80px;
+    max-width: 1700px;
+    margin: 0 auto;
+}
+
+/* ===== SEARCH & FILTER v2 ===== */
+.search-filter-container {
+    margin-bottom: 56px;
+    background: rgba(21, 27, 45, 0.5);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    padding: 28px 32px;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    box-shadow: var(--shadow-elegant);
+    position: relative;
+    overflow: hidden;
+}
+
+.search-filter-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(91, 140, 255, 0.4), transparent);
+}
+
+/* Buscador */
+.search-wrapper {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    pointer-events: none;
+    transition: var(--transition-fast);
+}
+
+.search-wrapper:focus-within .search-icon {
+    color: var(--primary);
+}
+
+#search-input {
+    width: 100%;
+    padding: 16px 20px 16px 52px;
+    background: rgba(11, 16, 32, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    color: var(--text-main);
+    font-size: 1rem;
+    font-family: var(--font-main);
+    transition: var(--transition);
+    caret-color: var(--primary);
+}
+
+#search-input::placeholder {
+    color: var(--text-muted);
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(11, 16, 32, 0.9);
+    box-shadow: 0 0 0 3px rgba(91, 140, 255, 0.12), 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Sugerencias de búsqueda */
+.search-suggestions {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    z-index: 100;
+    box-shadow: var(--shadow-elegant);
+    display: none;
+}
+
+.search-suggestions.active { display: block; }
+
+.suggestion-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.suggestion-item:last-child { border-bottom: none; }
+
+.suggestion-item:hover {
+    background: rgba(91, 140, 255, 0.1);
+    color: var(--text-main);
+}
+
+/* Filtros de género */
+.filter-genres {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+}
+
+.filter-genres::-webkit-scrollbar { display: none; }
+
+.btn-filter {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 9px 22px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-family: var(--font-main);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: var(--transition-fast);
+}
+
+.btn-filter:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-main);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.btn-filter.active {
+    background: var(--gradient-primary);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 6px 18px rgba(91, 140, 255, 0.35);
+}
+
+/* ===== GENRE SECTIONS & CAROUSELS ===== */
+.genre-section {
+    margin-bottom: 56px;
+    animation: fadeInUp 0.5s ease both;
+}
+
+.genre-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    padding: 0 4px;
+}
+
+.genre-title {
+    font-size: clamp(1.3rem, 2.8vw, 1.65rem);
+    font-weight: 800;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: -0.01em;
+}
+
+.genre-title-line {
+    display: inline-block;
+    width: 4px;
+    height: 1.1em;
+    background: var(--gradient-primary);
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-right: 4px;
+    flex-shrink: 0;
+}
+
+.genre-count {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.carousel-wrapper {
+    position: relative;
+    margin: 0 -16px;
+    padding: 0 16px;
+}
+
+.movies-grid {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 12px 4px 28px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.movies-grid::-webkit-scrollbar { display: none; }
+
+/* ===== MOVIE CARD v2 — PREMIUM ===== */
+.movie-card {
+    flex: 0 0 auto;
+    width: clamp(155px, 18vw, 220px);
+    scroll-snap-align: start;
+    background: var(--card-bg);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.35s ease,
+                border-color 0.35s ease;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: var(--shadow-card);
+    cursor: pointer;
+    /* will-change solo en hover para no crear capas GPU innecesarias */
+    contain: layout style;
+}
+
+/* Activar will-change solo cuando se necesita (hover) */
+.movie-card:hover {
+    will-change: transform;
+    transform: translateY(-10px) scale(1.03);
+    z-index: var(--z-card);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(91, 140, 255, 0.25);
+}
+
+/* Poster */
+.movie-poster-container {
+    position: relative;
+    aspect-ratio: 2/3;
+    overflow: hidden;
+    background: var(--bg-elevated);
+}
+
+.movie-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+}
+
+.movie-card:hover .movie-poster {
+    transform: scale(1.08);
+}
+
+/* Overlay degradado */
+.movie-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-card);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 16px;
+    gap: 10px;
+}
+
+.movie-card:hover .movie-overlay {
+    opacity: 1;
+}
+
+/* Botón "Ver ahora" dentro del overlay */
+.btn-watch-now {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    font-weight: 700;
+    font-family: var(--font-main);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    box-shadow: 0 4px 16px rgba(91, 140, 255, 0.4);
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-watch-now:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+}
+
+.btn-watch-now::before {
+    content: '▶';
+    font-size: 0.75rem;
+}
+
+/* Rating en overlay */
+.overlay-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #FFB830;
+    font-weight: 700;
+    font-size: 0.88rem;
+}
+
+/* Badges */
+.quality-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: white;
+    padding: 3px 9px;
+    border-radius: var(--radius-xs);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-transform: uppercase;
+}
+
+.badge-estreno {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--gradient-primary);
+    color: white;
+    padding: 3px 9px;
+    border-radius: var(--radius-xs);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(91, 140, 255, 0.4);
+}
+
+/* Botón favorito */
+.favorite-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: white;
+    border: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+    z-index: 5;
+    font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.favorite-btn:hover {
+    background: rgba(255, 77, 109, 0.8);
+    transform: scale(1.15);
+    border-color: transparent;
+}
+
+.favorite-btn.active {
+    background: var(--danger);
+    border-color: transparent;
+    box-shadow: 0 4px 14px rgba(255, 77, 109, 0.5);
+}
+
+/* Info de la tarjeta */
+.movie-info {
+    padding: 14px 14px 16px;
+    background: var(--card-bg);
+    position: relative;
+}
+
+.movie-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 14px;
+    right: 14px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(91, 140, 255, 0.15), transparent);
+}
+
+.movie-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: -0.01em;
+}
+
+.movie-metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    gap: 4px;
+}
+
+.movie-year-genre {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rating-pill {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    color: var(--warning);
+    font-weight: 700;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.price-tag {
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 0.92rem;
+    white-space: nowrap;
+}
+
+.price-free {
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 0.88rem;
+}
+
+/* ===== CAROUSEL ARROWS v2 ===== */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-60%);
+    width: 44px;
+    height: 44px;
+    background: rgba(11, 16, 32, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: var(--transition-fast);
+    opacity: 0;
+    font-size: 1rem;
+    box-shadow: var(--shadow-soft);
+}
+
+.carousel-wrapper:hover .carousel-arrow {
+    opacity: 1;
+}
+
+.carousel-arrow:hover {
+    background: var(--gradient-primary);
+    border-color: transparent;
+    transform: translateY(-60%) scale(1.1);
+    box-shadow: var(--shadow-glow);
+}
+
+.carousel-arrow.prev { left: 2px; }
+.carousel-arrow.next { right: 2px; }
+
+/* Fade edges del carrusel */
+.carousel-wrapper::before,
+.carousel-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.carousel-wrapper::before {
+    left: 16px;
+    background: linear-gradient(90deg, var(--bg-main), transparent);
+}
+
+.carousel-wrapper::after {
+    right: 16px;
+    background: linear-gradient(270deg, var(--bg-main), transparent);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .carousel-arrow { display: none; }
+    .movies-grid { gap: 12px; padding: 8px 2px 22px; }
+    .movie-card { width: clamp(140px, 42vw, 180px); }
+    .search-filter-container { padding: 20px; }
+    .genre-section { margin-bottom: 40px; }
+}
+
+@media (max-width: 480px) {
+    .container { padding: 80px 4% 60px; }
+    .movie-card { width: clamp(130px, 44vw, 165px); }
+    .movie-info { padding: 12px; }
+    .movie-title { font-size: 0.88rem; }
+}
